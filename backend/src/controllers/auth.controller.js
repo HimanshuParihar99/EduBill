@@ -6,7 +6,14 @@ const signToken = (id) => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: 
 
 export const registerStudent = async (req, res) => {
   try {
-    const { name, email, password, contact, class: className, rollNo } = req.body;
+    let { name, email, password, contact, class: className, rollNo } = req.body;
+    // Trim and normalize input
+    name = name?.trim();
+    email = email?.trim().toLowerCase();
+    password = password?.trim();
+    contact = contact?.trim();
+    className = className?.trim();
+    rollNo = rollNo?.trim();
     if (!name || !email || !password || !contact || !className || !rollNo) {
       return res.status(400).json({ message: "All fields are required" });
     }
@@ -43,7 +50,9 @@ export const registerStudent = async (req, res) => {
 
 export const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    let { email, password } = req.body;
+    email = email?.trim().toLowerCase();
+    password = password?.trim();
     if (!email || !password) {
       return res.status(400).json({ message: "Email and password are required" });
     }

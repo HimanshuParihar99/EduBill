@@ -6,6 +6,7 @@ import authRoutes from "./routes/auth.route.js";
 import studentRoutes from "./routes/student.route.js";
 import feeRoutes from "./routes/fee.route.js";
 import reportRoutes from "./routes/report.route.js";
+import adminRoutes from "./routes/admin.route.js";
 import errorHandler from "./middleware/error.middleware.js";
 
 const app = express();
@@ -23,6 +24,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/students", studentRoutes);
 app.use("/api/fees", feeRoutes);
 app.use("/api/reports", reportRoutes);
+app.use("/api/admin", adminRoutes);
 
 // Health check route
 app.get("/ping", (req, res) => {
